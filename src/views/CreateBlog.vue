@@ -16,13 +16,32 @@
   </v-container>
 </template>
 <script>
+import db from "../../firebaseConfig";
 export default {
   name: "CreateBlog",
   data: () => ({
+    postId: 0,
     headerText: "",
     bodyText: ""
   }),
-  methods: {},
+  methods: {
+    createBlog() {
+      db.collection("blog")
+        .add({
+          post_id: this.postId,
+          post_title: this.headerText,
+          post_content: this.bodyText
+        })
+        .then(() => {
+          this.$router.push("/");
+          this.incrementPostId();
+        })
+        .catch(error => console.log(error));
+    },
+    incrementPostId() {
+      this.postId++;
+    }
+  },
   computed: {
     isEmptyContext() {
       return this.bodyText.length === 0 || this.headerText.length === 0;

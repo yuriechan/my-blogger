@@ -1,56 +1,62 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
+    <v-card class="overflow-hidden">
+      <v-app-bar
+        absolute
+        color="#6A76AB"
+        dark
+        shrink-on-scroll
+        prominent
+        src="https://picsum.photos/1920/1080?random"
+        fade-img-on-scroll
+        scroll-target="#scrolling-techniques-4"
       >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
+        <template v-slot:img="{ props }">
+          <v-img
+            v-bind="props"
+            gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"
+          ></v-img>
+        </template>
 
-    <v-content>
-      <HelloWorld />
-    </v-content>
+        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+
+        <v-toolbar-title>Talk your thoughts.</v-toolbar-title>
+
+        <v-spacer></v-spacer>
+
+        <template v-slot:extension>
+          <v-tabs align-with-title>
+            <v-tab><router-link to="/">Gallery</router-link></v-tab>
+            <v-tab><router-link to="/about">Write</router-link></v-tab>
+          </v-tabs>
+        </template>
+      </v-app-bar>
+      <v-sheet
+        id="scrolling-techniques-4"
+        class="overflow-y-auto"
+        max-height="800"
+      >
+        <v-container style="height: 1000px;"><router-view /></v-container>
+      </v-sheet>
+    </v-card>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
-
 export default {
   name: "App",
 
-  components: {
-    HelloWorld
-  },
+  components: {},
 
   data: () => ({
     //
   })
 };
 </script>
+
+<style>
+.v-application a {
+  color: white !important;
+  text-decoration: none;
+}
+</style>

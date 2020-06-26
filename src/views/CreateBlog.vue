@@ -9,14 +9,18 @@
     >
     </v-textarea>
     <div class="text-center">
-      <v-btn rounded color="primary" :disabled="isEmptyContext"
+      <v-btn
+        rounded
+        color="primary"
+        :disabled="isEmptyContext"
+        @click="createBlog"
         >Publish it.
       </v-btn>
     </div>
   </v-container>
 </template>
 <script>
-import db from "../../firebaseConfig";
+import db from "../../firebaseConfig.js";
 export default {
   name: "CreateBlog",
   data: () => ({
@@ -34,12 +38,18 @@ export default {
         })
         .then(() => {
           this.$router.push("/");
+          this.clearInputField();
           this.incrementPostId();
+          console.log("was posted!");
         })
         .catch(error => console.log(error));
     },
     incrementPostId() {
       this.postId++;
+    },
+    clearInputField() {
+      this.headerText = "";
+      this.bodyText = "";
     }
   },
   computed: {

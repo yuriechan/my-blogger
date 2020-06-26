@@ -10,6 +10,7 @@
         src="https://picsum.photos/1920/1080?random"
         fade-img-on-scroll
         scroll-target="#scrolling-techniques-4"
+        style="position:inherit"
       >
         <template v-slot:img="{ props }">
           <v-img
@@ -27,10 +28,11 @@
         <template v-slot:extension>
           <v-tabs align-with-title>
             <v-tab><router-link to="/">Gallery</router-link></v-tab>
-            <v-tab><router-link to="/about">Write</router-link></v-tab>
+            <v-tab><router-link to="/CreateBlog">Write</router-link></v-tab>
           </v-tabs>
         </template>
       </v-app-bar>
+
       <v-sheet
         id="scrolling-techniques-4"
         class="overflow-y-auto"

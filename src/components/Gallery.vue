@@ -21,7 +21,7 @@
               </v-img>
 
               <v-card-subtitle class="pb-0">{{
-                `Number: ${blogPost.post_id}`
+                `${blogPost.post_timestamp}`
               }}</v-card-subtitle>
 
               <v-card-text class="text--primary">
@@ -63,16 +63,22 @@ export default {
             id: doc.id,
             post_id: doc.data().post_id,
             post_title: doc.data().post_title,
-            post_content: doc.data().post_content
+            post_content: doc.data().post_content,
+            post_timestamp: doc.data().post_timestamp
           };
           this.blogPosts.push(data);
-          this.sortByDescendingId(this.blogPosts);
         });
+        this.sortByLatestTime(this.blogPosts);
       });
   },
   methods: {
     sortByDescendingId(arr) {
       arr.sort((a, b) => b.post_id - a.post_id);
+    },
+    sortByLatestTime(arr) {
+      arr.sort(
+        (a, b) => new Date(b.post_timestamp) - new Date(a.post_timestamp)
+      );
     },
     limitTextLength(state) {
       let slicedText =

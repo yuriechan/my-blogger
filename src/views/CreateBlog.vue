@@ -33,7 +33,8 @@ export default {
         .add({
           post_id: this.postCount,
           post_title: this.headerText,
-          post_content: this.bodyText
+          post_content: this.bodyText,
+          post_timestamp: Date()
         })
         .then(() => {
           this.$router.push("/");

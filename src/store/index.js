@@ -4,8 +4,15 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    isPostSubmitted: false,
+    postCount: 0
+  },
+  mutations: {
+    incrementPostCount(state) {
+      state.postCount++;
+    }
+  },
   actions: {},
   modules: {}
 });

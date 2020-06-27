@@ -2,28 +2,39 @@
   <div>
     <v-container v-for="blogPost in blogPosts" v-bind:key="blogPost.id">
       <v-hover v-slot:default="{ hover }">
-        <v-card
-          class="mx-auto"
-          max-width="400"
-          :elevation="hover ? 12 : 2"
-          :class="{ 'on-hover': hover }"
-        >
-          <v-img
-            class="white--text align-end"
-            height="200px"
-            src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-          >
-            <v-card-title>{{ blogPost.post_title }}</v-card-title>
-          </v-img>
+        <v-dialog width="900px">
+          <template v-slot:activator="{ on, attrs }">
+            <v-card
+              class="mx-auto"
+              max-width="400"
+              :elevation="hover ? 12 : 2"
+              :class="{ 'on-hover': hover }"
+              v-bind="attrs"
+              v-on="on"
+            >
+              <v-img
+                class="white--text align-end"
+                height="200px"
+                :src="blogDefaultImg"
+              >
+                <v-card-title>{{ blogPost.post_title }}</v-card-title>
+              </v-img>
 
-          <v-card-subtitle class="pb-0">{{
-            `Number: ${blogPost.post_id}`
-          }}</v-card-subtitle>
+              <v-card-subtitle class="pb-0">{{
+                `Number: ${blogPost.post_id}`
+              }}</v-card-subtitle>
 
-          <v-card-text class="text--primary">
-            <div>{{ limitTextLength(blogPost.post_content) }}</div>
-          </v-card-text>
-        </v-card>
+              <v-card-text class="text--primary">
+                <div>{{ limitTextLength(blogPost.post_content) }}</div>
+              </v-card-text>
+            </v-card>
+          </template>
+          <BlogDetail
+            :postTitle="blogPost.post_title"
+            :postContent="blogPost.post_content"
+            :postDefaultImg="blogDefaultImg"
+          />
+        </v-dialog>
       </v-hover>
       <v-spacer></v-spacer>
     </v-container>
@@ -32,11 +43,15 @@
 
 <script>
 import db from "../../firebaseConfig";
+import BlogDetail from "../components/BlogDetail";
 export default {
   name: "Gallery",
-
+  components: {
+    BlogDetail
+  },
   data: () => ({
-    blogPosts: []
+    blogPosts: [],
+    blogDefaultImg: "https://cdn.vuetifyjs.com/images/cards/docks.jpg"
   }),
   created() {
     db.collection("blog")

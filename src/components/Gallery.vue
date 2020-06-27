@@ -1,23 +1,30 @@
 <template>
   <div>
     <v-container v-for="blogPost in blogPosts" v-bind:key="blogPost.id">
-      <v-card class="mx-auto" max-width="400">
-        <v-img
-          class="white--text align-end"
-          height="200px"
-          src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+      <v-hover v-slot:default="{ hover }">
+        <v-card
+          class="mx-auto"
+          max-width="400"
+          :elevation="hover ? 12 : 2"
+          :class="{ 'on-hover': hover }"
         >
-          <v-card-title>{{ blogPost.post_title }}</v-card-title>
-        </v-img>
+          <v-img
+            class="white--text align-end"
+            height="200px"
+            src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+          >
+            <v-card-title>{{ blogPost.post_title }}</v-card-title>
+          </v-img>
 
-        <v-card-subtitle class="pb-0">{{
-          `Number: ${blogPost.post_id}`
-        }}</v-card-subtitle>
+          <v-card-subtitle class="pb-0">{{
+            `Number: ${blogPost.post_id}`
+          }}</v-card-subtitle>
 
-        <v-card-text class="text--primary">
-          <div>{{ limitTextLength(blogPost.post_content) }}</div>
-        </v-card-text>
-      </v-card>
+          <v-card-text class="text--primary">
+            <div>{{ limitTextLength(blogPost.post_content) }}</div>
+          </v-card-text>
+        </v-card>
+      </v-hover>
       <v-spacer></v-spacer>
     </v-container>
   </div>
@@ -61,3 +68,12 @@ export default {
   computed: {}
 };
 </script>
+<style scoped>
+.v-card {
+  transition: opacity 0.4s ease-in-out;
+}
+
+.v-card:not(.on-hover) {
+  opacity: 0.9;
+}
+</style>

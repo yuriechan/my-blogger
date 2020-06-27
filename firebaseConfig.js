@@ -1,5 +1,6 @@
 import firebase from "firebase";
 import "firebase/firestore";
+import admin from "firebase-admin";
 
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_APIKEY,
@@ -16,5 +17,9 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 const db = firebase.firestore();
+
+// This is the line of code, which spits out error about installing 'dns'
+// Please uncomment to reproduce it
+// const timestamp = admin.firestore.Timestamp.now();
 
 export default db;

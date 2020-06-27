@@ -15,9 +15,7 @@
         }}</v-card-subtitle>
 
         <v-card-text class="text--primary">
-          <div>Whitehaven Beach</div>
-
-          <div>{{ blogPost.post_content }}</div>
+          <div>{{ limitTextLength(blogPost.post_content) }}</div>
         </v-card-text>
       </v-card>
       <v-spacer></v-spacer>
@@ -53,7 +51,13 @@ export default {
   methods: {
     sortByDescendingId(arr) {
       arr.sort((a, b) => b.post_id - a.post_id);
+    },
+    limitTextLength(state) {
+      let slicedText =
+        state.length > 190 ? state.slice(0, 190) + "....." : state;
+      return slicedText;
     }
-  }
+  },
+  computed: {}
 };
 </script>

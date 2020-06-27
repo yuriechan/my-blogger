@@ -21,7 +21,7 @@
               </v-img>
 
               <v-card-subtitle class="pb-0">{{
-                `${blogPost.post_timestamp}`
+                `${formatDate(blogPost.post_timestamp)}`
               }}</v-card-subtitle>
 
               <v-card-text class="text--primary">
@@ -44,6 +44,7 @@
 <script>
 import db from "../../firebaseConfig";
 import BlogDetail from "../components/BlogDetail";
+import moment from "moment";
 export default {
   name: "Gallery",
   components: {
@@ -84,6 +85,9 @@ export default {
       let slicedText =
         state.length > 190 ? state.slice(0, 190) + "....." : state;
       return slicedText;
+    },
+    formatDate(originalDate) {
+      return moment(originalDate).format("LLL");
     }
   },
   computed: {}

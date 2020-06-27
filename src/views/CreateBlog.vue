@@ -24,7 +24,6 @@ import db from "../../firebaseConfig.js";
 export default {
   name: "CreateBlog",
   data: () => ({
-    postId: 0,
     headerText: "",
     bodyText: ""
   }),
@@ -32,20 +31,17 @@ export default {
     createBlog() {
       db.collection("blog")
         .add({
-          post_id: this.postId,
+          post_id: this.postCount,
           post_title: this.headerText,
           post_content: this.bodyText
         })
         .then(() => {
           this.$router.push("/");
           this.clearInputField();
-          this.incrementPostId();
+          this.$store.commit("incrementPostCount");
           console.log("was posted!");
         })
         .catch(error => console.log(error));
-    },
-    incrementPostId() {
-      this.postId++;
     },
     clearInputField() {
       this.headerText = "";
@@ -55,6 +51,9 @@ export default {
   computed: {
     isEmptyContext() {
       return this.bodyText.length === 0 || this.headerText.length === 0;
+    },
+    postCount() {
+      return this.$store.state.postCount;
     }
   }
 };

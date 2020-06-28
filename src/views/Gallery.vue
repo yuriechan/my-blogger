@@ -1,10 +1,11 @@
 <template>
   <div>
     <v-container v-for="blogPost in blogPosts" v-bind:key="blogPost.id">
-      <v-hover v-slot:default="{ hover }">
-        <v-dialog width="900px">
-          <template v-slot:activator="{ on, attrs }">
+      <v-dialog width="900px">
+        <template v-slot:activator="{ on, attrs }">
+          <v-hover v-slot:default="{ hover }">
             <v-card
+              @click="addQueryToPath(blogPost.post_id)"
               class="mx-auto"
               max-width="400"
               :elevation="hover ? 12 : 2"
@@ -28,14 +29,18 @@
                 <div>{{ limitTextLength(blogPost.post_content) }}</div>
               </v-card-text>
             </v-card>
-          </template>
-          <BlogDetail
-            :postTitle="blogPost.post_title"
-            :postContent="blogPost.post_content"
-            :postDefaultImg="blogDefaultImg"
-          />
-        </v-dialog>
-      </v-hover>
+          </v-hover>
+        </template>
+
+        <BlogDetail
+          :postTitle="blogPost.post_title"
+          :postContent="blogPost.post_content"
+          :postDefaultImg="blogDefaultImg"
+          :postId="blogPost.post_id"
+          :postAutoId="blogPost.id"
+        />
+      </v-dialog>
+
       <v-spacer></v-spacer>
     </v-container>
   </div>
@@ -88,6 +93,14 @@ export default {
     },
     formatDate(originalDate) {
       return moment(originalDate).format("LLL");
+    },
+    addQueryToPath(postId) {
+      console.log("add param to path");
+      console.log(this.$router);
+      this.$router.push({
+        name: "Gallery",
+        query: { id: postId }
+      });
     }
   },
   computed: {}

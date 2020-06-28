@@ -15,6 +15,11 @@ const routes = [
     path: "/CreateBlog",
     name: "CreateBlog",
     component: CreateBlog
+  },
+  {
+    path: "/:id",
+    name: "Gallery",
+    component: Gallery
   }
 ];
 

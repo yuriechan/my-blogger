@@ -43,8 +43,13 @@
           <v-icon>mdi-delete</v-icon>
         </v-btn>
       </v-speed-dial>
-      <v-btn class="ma-2 saveBtn" outlined color="indigo"
-        >Outlined Button</v-btn
+      <v-btn
+        class="ma-2 saveBtn"
+        absolute
+        outlined
+        color="indigo"
+        v-show="saveBtnOpen"
+        >Save change</v-btn
       >
     </v-card-actions>
     <v-dialog v-model="confirmDialogOpen" max-width="500px">
@@ -82,8 +87,8 @@ export default {
     bottom: true,
     transition: "slide-y-reverse-transition",
     confirmDialogOpen: false,
-    titleText: "",
-    bodyText: "",
+    editedTitle: null,
+    editedBody: null,
     editing: false,
     saveBtnOpen: false
   }),
@@ -101,13 +106,16 @@ export default {
         .catch(err => console.log("Error getting documents", err));
     },
     editTitle(e) {
-      this.titleText = e.target.innerText;
+      this.editedTitle = e.target.innerText;
     },
     editBody(e) {
-      this.bodyText = e.target.innerText;
+      this.editedBody = e.target.innerText;
     },
-    textChanged(originalText, newText) {
-      return originalText.localeCompare(newText);
+    textChanged() {
+      return (
+        this.postTitle.trim() != this.editedTitle.trim() ||
+        this.postContent.trim() != this.editedBody.trim()
+      );
     }
     // Did not work as expected, might use later.
     // focusTitleInput() {
@@ -122,20 +130,38 @@ export default {
     // }
   },
   watch: {
-    // editing: function(val) {
-    //   console.log(val);
-    //   if (val) {
-    //     this.focusTitleInput();
-    //     this.focusBodyInput();
-    //   }
+    postTitle: function() {
+      console.log("watching posttile");
+      console.log(this.postTitle);
+      this.editedTitle = this.postTitle;
+    },
+    postContent: function() {
+      console.log("watching post content");
+      console.log(this.postContent);
+      this.editedBody = this.postContent;
+    },
+    editedTitle: function() {
+      console.log("inside watch title");
+      this.saveBtnOpen = this.textChanged();
+      console.log(this.saveBtnOpen);
+    },
+    editedBody: function() {
+      console.log("inside watch body");
+      this.saveBtnOpen = this.textChanged();
+      console.log(this.saveBtnOpen);
+    }
+  },
+  computed: {
+    // editedTitle() {
+    //   return { ...this.postTitle };
     // }
-  }
+  },
+  mounted() {}
 };
 </script>
 <style scoped>
 .saveBtn {
   left: 16px;
-  position: absolute;
   bottom: 16px;
-}</style
->>
+}
+</style>

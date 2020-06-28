@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Gallery from "../components/Gallery.vue";
+import Gallery from "../views/Gallery.vue";
 import CreateBlog from "../views/CreateBlog.vue";
 
 Vue.use(VueRouter);

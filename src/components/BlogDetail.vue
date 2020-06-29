@@ -44,6 +44,7 @@
         </v-btn>
       </v-speed-dial>
       <v-btn
+        @click="updatePost()"
         class="ma-2 saveBtn"
         absolute
         outlined
@@ -105,6 +106,28 @@ export default {
         })
         .catch(err => console.log("Error getting documents", err));
     },
+    updatePost() {
+      const autoIdDocRef = db.collection("blog").doc(this.postAutoId);
+      return db
+        .runTransaction(transaction => {
+          return transaction.get(autoIdDocRef).then(autoIdDoc => {
+            if (!autoIdDoc.exists) {
+              throw "Document does not exist!";
+            }
+            transaction.update(autoIdDocRef, {
+              post_title: this.editedTitle,
+              post_content: this.editedBody
+            });
+          });
+        })
+        .then(() => {
+          console.log("Transaction success!");
+          this.$router.go();
+        })
+        .catch(error => {
+          console.log("Transaction error", error);
+        });
+    },
     editTitle(e) {
       this.editedTitle = e.target.innerText;
     },
@@ -117,17 +140,6 @@ export default {
         this.postContent.trim() != this.editedBody.trim()
       );
     }
-    // Did not work as expected, might use later.
-    // focusTitleInput() {
-    //   console.log("focus");
-    //   console.log(this.$refs.editTitle);
-    //   this.$refs.editTitle.focus();
-    // },
-    // focusBodyInput() {
-    //   console.log("focus");
-    //   console.log(this.$refs.editBody);
-    //   this.$refs.editBody.focus();
-    // }
   },
   watch: {
     postTitle: function() {

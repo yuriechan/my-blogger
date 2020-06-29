@@ -5,7 +5,6 @@
         <template v-slot:activator="{ on, attrs }">
           <v-hover v-slot:default="{ hover }">
             <v-card
-              @click="addQueryToPath(blogPost.post_id)"
               class="mx-auto"
               max-width="400"
               :elevation="hover ? 12 : 2"
@@ -95,14 +94,6 @@ export default {
     },
     formatDate(originalDate) {
       return moment(originalDate).format("LLL");
-    },
-    addQueryToPath(postId) {
-      console.log("add param to path");
-      console.log(this.$router);
-      this.$router.push({
-        name: "Gallery",
-        query: { id: postId }
-      });
     }
   },
   computed: {}

@@ -175,7 +175,7 @@ export default {
     detailDialog: function() {
       if (this.detailDialog === false) {
         this.editing = this.saveBtnOpen = false;
-        this.$router.go(-1);
+        this.$router.replace("/").catch(() => {});
       }
     }
   }

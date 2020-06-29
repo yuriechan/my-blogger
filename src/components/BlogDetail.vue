@@ -31,7 +31,13 @@
             <v-icon v-else>mdi-account-circle</v-icon>
           </v-btn>
         </template>
-        <v-btn fab dark small color="green" @click="editing = !editing">
+        <v-btn
+          fab
+          dark
+          small
+          color="green"
+          @click="(editing = !editing), createCopy()"
+        >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
         <v-btn
@@ -144,28 +150,20 @@ export default {
         this.postTitle.trim() != this.editedTitle.trim() ||
         this.postContent.trim() != this.editedBody.trim()
       );
+    },
+    createCopy() {
+      this.editedTitle = this.postTitle;
+      this.editedBody = this.postContent;
     }
   },
   watch: {
-    postTitle: function() {
-      console.log("watching posttile");
-      console.log(this.postTitle);
-      this.editedTitle = this.postTitle;
-    },
-    postContent: function() {
-      console.log("watching post content");
-      console.log(this.postContent);
-      this.editedBody = this.postContent;
-    },
     editedTitle: function() {
       console.log("inside watch title");
       this.saveBtnOpen = this.textChanged();
-      console.log(this.saveBtnOpen);
     },
     editedBody: function() {
       console.log("inside watch body");
       this.saveBtnOpen = this.textChanged();
-      console.log(this.saveBtnOpen);
     }
   }
 };

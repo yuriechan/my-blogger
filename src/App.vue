@@ -19,9 +19,9 @@
           ></v-img>
         </template>
 
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon v-show="false"></v-app-bar-nav-icon>
 
-        <v-toolbar-title>Talk your thoughts.</v-toolbar-title>
+        <v-toolbar-title>Welcome, free your mind.</v-toolbar-title>
 
         <v-spacer></v-spacer>
 

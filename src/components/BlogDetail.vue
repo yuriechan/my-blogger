@@ -57,6 +57,7 @@
         outlined
         color="indigo"
         v-show="saveBtnOpen"
+        :disabled="isEmptyField"
         >Save change</v-btn
       >
     </v-card-actions>
@@ -177,6 +178,14 @@ export default {
         this.editing = this.saveBtnOpen = false;
         this.$router.replace("/").catch(() => {});
       }
+    }
+  },
+  computed: {
+    isEmptyField() {
+      if (this.editedTitle === null || this.editedBody === null) {
+        return false;
+      }
+      return this.editedTitle.length === 0 || this.editedBody.length === 0;
     }
   }
 };

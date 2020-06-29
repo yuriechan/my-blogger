@@ -8,10 +8,10 @@
     </v-img>
     <div class="px-16">
       <v-card-title class="pb-10" :contenteditable="editing" @input="editTitle">
-        <span class="headline">{{ this.postTitle }}</span>
+        <span class="headline">{{ postTitle }}</span>
       </v-card-title>
       <v-card-text :contenteditable="editing" @input="editBody">{{
-        this.postContent
+        postContent
       }}</v-card-text>
     </div>
     <v-card-actions>

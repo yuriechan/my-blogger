@@ -101,16 +101,15 @@ export default {
   }),
   methods: {
     deletePost() {
-      db.collection("blog")
-        .where("post_id", "==", this.$route.query.id)
-        .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
-            doc.ref.delete();
-          });
+      const autoIdDocRef = db.collection("blog").doc(this.postAutoId);
+      autoIdDocRef
+        .delete()
+        .then(() => {
           this.$router.go();
         })
-        .catch(err => console.log("Error getting documents", err));
+        .catch(error => {
+          "Error removing document: ", error;
+        });
     },
     updatePost() {
       const autoIdDocRef = db.collection("blog").doc(this.postAutoId);

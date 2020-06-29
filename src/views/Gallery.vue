@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container v-for="blogPost in blogPosts" v-bind:key="blogPost.id">
-      <v-dialog width="900px">
+      <v-dialog width="900px" v-model="dialog">
         <template v-slot:activator="{ on, attrs }">
           <v-hover v-slot:default="{ hover }">
             <v-card
@@ -38,6 +38,7 @@
           :postDefaultImg="blogDefaultImg"
           :postId="blogPost.post_id"
           :postAutoId="blogPost.id"
+          :detailDialog="dialog"
         />
       </v-dialog>
 
@@ -57,7 +58,8 @@ export default {
   },
   data: () => ({
     blogPosts: [],
-    blogDefaultImg: "https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+    blogDefaultImg: "https://cdn.vuetifyjs.com/images/cards/docks.jpg",
+    dialog: false
   }),
   created() {
     db.collection("blog")

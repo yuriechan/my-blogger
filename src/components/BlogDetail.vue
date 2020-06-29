@@ -86,7 +86,14 @@
 import db from "../../firebaseConfig";
 export default {
   name: "BlogDetail",
-  props: ["postTitle", "postContent", "postDefaultImg", "postId", "postAutoId"],
+  props: [
+    "postTitle",
+    "postContent",
+    "postDefaultImg",
+    "postId",
+    "postAutoId",
+    "detailDialog"
+  ],
   data: () => ({
     direction: "left",
     fab: false,
@@ -164,6 +171,11 @@ export default {
     editedBody: function() {
       console.log("inside watch body");
       this.saveBtnOpen = this.textChanged();
+    },
+    detailDialog: function() {
+      if (this.detailDialog === false) {
+        this.editing = this.saveBtnOpen = false;
+      }
     }
   }
 };

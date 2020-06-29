@@ -1,12 +1,12 @@
 <template>
-  <v-card
-    :style="
-      editing ? { backgroundColor: '#BBDEFB' } : { backgroundColor: '#FFFFFF' }
-    "
-  >
+  <v-card>
     <v-img class="white--text" height="200px" :src="this.postDefaultImg">
     </v-img>
-    <div class="px-16">
+    <div
+      class="px-16"
+      :style="editing ? { outlineWidth: 'thin', outlineStyle: 'dashed' } : null"
+      :class="editing ? editField.className : null"
+    >
       <v-card-title class="pb-10" :contenteditable="editing" @input="editTitle">
         <span class="headline">{{ postTitle }}</span>
       </v-card-title>
@@ -17,6 +17,7 @@
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-speed-dial
+        class="actionOption"
         v-model="fab"
         :bottom="bottom"
         :right="right"
@@ -91,7 +92,12 @@ export default {
     editedTitle: null,
     editedBody: null,
     editing: false,
-    saveBtnOpen: false
+    saveBtnOpen: false,
+    editField: {
+      className: {
+        "ma-2": true
+      }
+    }
   }),
   methods: {
     deletePost() {
@@ -162,18 +168,15 @@ export default {
       this.saveBtnOpen = this.textChanged();
       console.log(this.saveBtnOpen);
     }
-  },
-  computed: {
-    // editedTitle() {
-    //   return { ...this.postTitle };
-    // }
-  },
-  mounted() {}
+  }
 };
 </script>
 <style scoped>
 .saveBtn {
   left: 16px;
   bottom: 16px;
+}
+.actionOption {
+  top: -5px;
 }
 </style>

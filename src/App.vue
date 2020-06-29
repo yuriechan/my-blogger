@@ -28,7 +28,7 @@
         <template v-slot:extension>
           <v-tabs align-with-title>
             <v-tab><router-link to="/">Gallery</router-link></v-tab>
-            <v-tab><router-link to="/CreateBlog">Write</router-link></v-tab>
+            <v-tab><router-link to="/write">Write</router-link></v-tab>
           </v-tabs>
         </template>
       </v-app-bar>

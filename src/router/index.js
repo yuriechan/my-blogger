@@ -12,7 +12,7 @@ const routes = [
     component: Gallery
   },
   {
-    path: "/CreateBlog",
+    path: "/write",
     name: "CreateBlog",
     component: CreateBlog
   }

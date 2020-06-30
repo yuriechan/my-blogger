@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container v-for="blogPost in blogPosts" v-bind:key="blogPost.id">
-      <v-dialog width="900px" v-model="dialog">
+      <v-dialog width="900px">
         <template v-slot:activator="{ on, attrs }">
           <v-hover v-slot:default="{ hover }">
             <v-card

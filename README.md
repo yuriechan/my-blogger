@@ -1,7 +1,7 @@
 # my-blogger
 A simple website to post, update, delete blog posts without user authentication. <br>
-**Warning: Hosted version has glitches and bugs which was unseen during the development.<br> 
-To test the full feature, please run the application on your local machine.** <br>
+**Warning: the application is buggy when there is multiple blog post handled within the application** (As of June 30th)<br>
+**However, you will be able to test all the features with no problem as long as only one blog post is published in the application**<br> 
 See the hosted project [here](https://yurie-s-website.web.app/). 
 
 ## 🥞 Tech Stack

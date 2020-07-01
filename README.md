@@ -1,7 +1,7 @@
 # my-blogger
 A simple website to post, update, delete blog posts without user authentication. <br>
-See the hosted project [here](https://yurie-s-website.web.app/). 
-~~**Warning: the application is buggy when there is multiple blog post handled within the application** (As of June 30th)<br>~~ <== **this has been fixed (July 1st.)**
+See the hosted project [here](https://yurie-s-website.web.app/). <br>
+*It's bug-free now! (As of July 1st, 2020)**<br>
 
 ## 🥞 Tech Stack
 Created with [Vue](https://vuejs.org/index.html) / [Vuex](https://vuex.vuejs.org/) and bootstrapped with `vue create`.<br>
